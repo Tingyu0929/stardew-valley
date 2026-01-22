@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPC行程表 - 星露谷物語攻略</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .schedule-image {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: block;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .schedule-image:hover {
+            transform: scale(1.02);
+        }
+        .day-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .day-section h3 {
+            color: #4a90e2;
+            margin-top: 0;
+        }
+        .quick-nav {
+            position: sticky;
+            top: 60px;
+            background: white;
+            padding: 15px;
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            margin: 20px 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .quick-nav h3 {
+            margin-top: 0;
+            color: #4a90e2;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            padding: 10px 15px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #2c5f2d;
+            transform: translateY(-2px);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+        .lightbox img {
+            display: block;
+            margin: 50px auto;
+            max-width: 95%;
+            max-height: 95vh;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .lightbox .close:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 NPC完整行程表</h1>
+            <p>所有村民的每日行程 | 四季完整版</p>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html" class="home">🏠 返回首頁</a>
+            <a href="#spring">🌸 春季</a>
+            <a href="#summer">☀️ 夏季</a>
+            <a href="#fall">🍂 秋季</a>
+            <a href="#winter">❄️ 冬季</a>
+            <a href="#deviations">⚠️ 特殊情況</a>
+        </div>
+        
+        <div class="content">
+            <section id="instructions" class="section">
+                <h2>📖 使用說明</h2>
+                
+                <div class="tip-box">
+                    <strong>💡 如何使用：</strong>
+                    <ul>
+                        <li><strong>點擊圖片</strong>可以放大查看（再點一次關閉）</li>
+                        <li><strong>使用快速導航</strong>跳轉到特定星期</li>
+                        <li>時間格式：0630 = 早上6:30，1400 = 下午2:00</li>
+                        <li>在手機上可以<strong>雙指縮放</strong>查看細節</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <strong>📍 如何找人：</strong>
+                    <ol>
+                        <li>選擇星期幾（Monday-Sunday）</li>
+                        <li>在<strong>橫軸</strong>找到NPC名稱</li>
+                        <li>在<strong>縱軸</strong>找到時間</li>
+                        <li>交叉點就是該NPC的位置！</li>
+                    </ol>
+                    <p><strong>例如：</strong>想找星期一下午2點的海莉在哪裡？</p>
+                    <p>→ 打開星期一圖片 → 找到Haley那一列 → 看1400那一行 = 就是她的位置！</p>
+                </div>
+            </section>
+            
+            <!-- 春季 -->
+            <section id="spring" class="section">
+                <h2>🌸 春季行程表 (Spring)</h2>
+                
+                <div class="quick-nav">
+                    <h3>快速導航：</h3>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="scrollToDay('spring-monday')">星期一</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-tuesday')">星期二</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-wednesday')">星期三</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-thursday')">星期四</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-friday')">星期五</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-saturday')">星期六</button>
+                        <button class="nav-btn" onclick="scrollToDay('spring-sunday')">星期日</button>
+                    </div>
+                </div>
+                
+                <div id="spring-monday" class="day-section">
+                    <h3>🌸 星期一 (Monday)</h3>
+                    <img src="schedules_images/Spring-Mon.jpg" alt="春季星期一行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-tuesday" class="day-section">
+                    <h3>🌸 星期二 (Tuesday)</h3>
+                    <img src="schedules_images/Spring-Tue.jpg" alt="春季星期二行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-wednesday" class="day-section">
+                    <h3>🌸 星期三 (Wednesday)</h3>
+                    <img src="schedules_images/Spring-Wed.jpg" alt="春季星期三行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-thursday" class="day-section">
+                    <h3>🌸 星期四 (Thursday)</h3>
+                    <img src="schedules_images/Spring-Thu.jpg" alt="春季星期四行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-friday" class="day-section">
+                    <h3>🌸 星期五 (Friday)</h3>
+                    <img src="schedules_images/Spring-Fri.jpg" alt="春季星期五行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-saturday" class="day-section">
+                    <h3>🌸 星期六 (Saturday)</h3>
+                    <img src="schedules_images/Spring-Sat.jpg" alt="春季星期六行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="spring-sunday" class="day-section">
+                    <h3>🌸 星期日 (Sunday)</h3>
+                    <img src="schedules_images/Spring-Sun.jpg" alt="春季星期日行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+            </section>
+            
+            <!-- 夏季 -->
+            <section id="summer" class="section">
+                <h2>☀️ 夏季行程表 (Summer)</h2>
+                
+                <div class="quick-nav">
+                    <h3>快速導航：</h3>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="scrollToDay('summer-monday')">星期一</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-tuesday')">星期二</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-wednesday')">星期三</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-thursday')">星期四</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-friday')">星期五</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-saturday')">星期六</button>
+                        <button class="nav-btn" onclick="scrollToDay('summer-sunday')">星期日</button>
+                    </div>
+                </div>
+                
+                <div id="summer-monday" class="day-section">
+                    <h3>☀️ 星期一 (Monday)</h3>
+                    <img src="schedules_images/Summer-Mon.jpg" alt="夏季星期一行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-tuesday" class="day-section">
+                    <h3>☀️ 星期二 (Tuesday)</h3>
+                    <img src="schedules_images/Summer-Tue.jpg" alt="夏季星期二行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-wednesday" class="day-section">
+                    <h3>☀️ 星期三 (Wednesday)</h3>
+                    <img src="schedules_images/Summer-Wed.jpg" alt="夏季星期三行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-thursday" class="day-section">
+                    <h3>☀️ 星期四 (Thursday)</h3>
+                    <img src="schedules_images/Summer-Thu.jpg" alt="夏季星期四行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-friday" class="day-section">
+                    <h3>☀️ 星期五 (Friday)</h3>
+                    <img src="schedules_images/Summer-Fri.jpg" alt="夏季星期五行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-saturday" class="day-section">
+                    <h3>☀️ 星期六 (Saturday)</h3>
+                    <img src="schedules_images/Summer-Sat.jpg" alt="夏季星期六行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="summer-sunday" class="day-section">
+                    <h3>☀️ 星期日 (Sunday)</h3>
+                    <img src="schedules_images/Summer-Sun.jpg" alt="夏季星期日行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+            </section>
+            
+            <!-- 秋季 -->
+            <section id="fall" class="section">
+                <h2>🍂 秋季行程表 (Fall)</h2>
+                
+                <div class="quick-nav">
+                    <h3>快速導航：</h3>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="scrollToDay('fall-monday')">星期一</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-tuesday')">星期二</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-wednesday')">星期三</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-thursday')">星期四</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-friday')">星期五</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-saturday')">星期六</button>
+                        <button class="nav-btn" onclick="scrollToDay('fall-sunday')">星期日</button>
+                    </div>
+                </div>
+                
+                <div id="fall-monday" class="day-section">
+                    <h3>🍂 星期一 (Monday)</h3>
+                    <img src="schedules_images/Fall-Mon.jpg" alt="秋季星期一行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-tuesday" class="day-section">
+                    <h3>🍂 星期二 (Tuesday)</h3>
+                    <img src="schedules_images/Fall-Tue.jpg" alt="秋季星期二行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-wednesday" class="day-section">
+                    <h3>🍂 星期三 (Wednesday)</h3>
+                    <img src="schedules_images/Fall-Wed.jpg" alt="秋季星期三行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-thursday" class="day-section">
+                    <h3>🍂 星期四 (Thursday)</h3>
+                    <img src="schedules_images/Fall-Thu.jpg" alt="秋季星期四行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-friday" class="day-section">
+                    <h3>🍂 星期五 (Friday)</h3>
+                    <img src="schedules_images/Fall-Fri.jpg" alt="秋季星期五行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-saturday" class="day-section">
+                    <h3>🍂 星期六 (Saturday)</h3>
+                    <img src="schedules_images/Fall-Sat.jpg" alt="秋季星期六行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="fall-sunday" class="day-section">
+                    <h3>🍂 星期日 (Sunday)</h3>
+                    <img src="schedules_images/Fall-Sun.jpg" alt="秋季星期日行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+            </section>
+            
+            <!-- 冬季 -->
+            <section id="winter" class="section">
+                <h2>❄️ 冬季行程表 (Winter)</h2>
+                
+                <div class="quick-nav">
+                    <h3>快速導航：</h3>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="scrollToDay('winter-monday')">星期一</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-tuesday')">星期二</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-wednesday')">星期三</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-thursday')">星期四</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-friday')">星期五</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-saturday')">星期六</button>
+                        <button class="nav-btn" onclick="scrollToDay('winter-sunday')">星期日</button>
+                    </div>
+                </div>
+                
+                <div id="winter-monday" class="day-section">
+                    <h3>❄️ 星期一 (Monday)</h3>
+                    <img src="schedules_images/Winter-Mon.jpg" alt="冬季星期一行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-tuesday" class="day-section">
+                    <h3>❄️ 星期二 (Tuesday)</h3>
+                    <img src="schedules_images/Winter-Tue.jpg" alt="冬季星期二行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-wednesday" class="day-section">
+                    <h3>❄️ 星期三 (Wednesday)</h3>
+                    <img src="schedules_images/Winter-Wed.jpg" alt="冬季星期三行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-thursday" class="day-section">
+                    <h3>❄️ 星期四 (Thursday)</h3>
+                    <img src="schedules_images/Winter-Thu.jpg" alt="冬季星期四行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-friday" class="day-section">
+                    <h3>❄️ 星期五 (Friday)</h3>
+                    <img src="schedules_images/Winter-Fri.jpg" alt="冬季星期五行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-saturday" class="day-section">
+                    <h3>❄️ 星期六 (Saturday)</h3>
+                    <img src="schedules_images/Winter-Sat.jpg" alt="冬季星期六行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+                
+                <div id="winter-sunday" class="day-section">
+                    <h3>❄️ 星期日 (Sunday)</h3>
+                    <img src="schedules_images/Winter-Sun.jpg" alt="冬季星期日行程表" class="schedule-image" onclick="openLightbox(this)">
+                </div>
+            </section>
+            
+            <!-- 特殊情況 -->
+            <section id="deviations" class="section">
+                <h2>⚠️ 特殊情況行程變化</h2>
+                
+                <div class="warning-box">
+                    <strong>重要提示：</strong>
+                    <p>NPC的行程在某些特殊情況下會改變！以下是兩種主要的變化情況。</p>
+                </div>
+                
+                <h3>💍 結婚後的行程變化</h3>
+                <div class="info-box">
+                    <p>當你與某位結婚候選人結婚後，他們平時會待在農場，但在某些特定日子會外出。</p>
+                    <p><strong>註：</strong>配偶會待在你的農場，除非以下情況發生。</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">NPC</th>
+                            <th>外出行程</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>艾比蓋爾<br>(Abigail)</strong></td>
+                            <td><strong>星期一：</strong>皮埃爾商店 → 墓園 → 酒館<br>
+                                <strong>星期五：</strong>皮埃爾商店 → 山湖 → 酒館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>亞歷克斯<br>(Alex)</strong></td>
+                            <td><strong>星期一：</strong>拜訪祖父母</td>
+                        </tr>
+                        <tr>
+                            <td><strong>艾利歐特<br>(Elliott)</strong></td>
+                            <td><strong>星期一：</strong>去海灘</td>
+                        </tr>
+                        <tr>
+                            <td><strong>艾米莉<br>(Emily)</strong></td>
+                            <td><strong>星期一：</strong>海莉家 → 酒館工作<br>
+                                <strong>星期五：</strong>碼頭 → 皮埃爾商店 → 酒館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>海莉<br>(Haley)</strong></td>
+                            <td><strong>星期一：</strong>回老家</td>
+                        </tr>
+                        <tr>
+                            <td><strong>哈維<br>(Harvey)</strong></td>
+                            <td><strong>星期一：</strong>皮埃爾商店 → 噴泉<br>
+                                <strong>星期二、四：</strong>診所工作</td>
+                        </tr>
+                        <tr>
+                            <td><strong>莉亞<br>(Leah)</strong></td>
+                            <td><strong>星期一：</strong>森林河邊 → 她的小屋</td>
+                        </tr>
+                        <tr>
+                            <td><strong>瑪魯<br>(Maru)</strong></td>
+                            <td><strong>星期一：</strong>拜訪父母 → 社區中心長椅<br>
+                                <strong>星期二、四：</strong>診所工作</td>
+                        </tr>
+                        <tr>
+                            <td><strong>潘妮<br>(Penny)</strong></td>
+                            <td><strong>星期一：</strong>皮埃爾商店 → 在鎮上閱讀<br>
+                                <strong>星期二、三、五：</strong>博物館教Jas和Vincent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>山姆<br>(Sam)</strong></td>
+                            <td><strong>星期一：</strong>拜訪父母<br>
+                                <strong>星期五：</strong>拜訪父母 → 酒館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>賽巴斯丁<br>(Sebastian)</strong></td>
+                            <td><strong>星期一：</strong>山湖 → 拜訪父母<br>
+                                <strong>星期五：</strong>海灘 → 酒館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>謝恩<br>(Shane)</strong></td>
+                            <td><strong>星期一：</strong>瑪妮家 → 森林<br>
+                                <strong>星期五：</strong>河邊 → 皮埃爾商店 → 酒館</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🌧️ 正常情況的行程變化</h3>
+                <div class="info-box">
+                    <p>在下雨天、特殊日子、社區中心修復前後等情況下，NPC的行程也會改變。</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">NPC</th>
+                            <th>特殊情況</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>艾比蓋爾</strong></td>
+                            <td>• 雨天：待在家或去酒館<br>
+                                • 春季4日：診所（6、16日去山區）<br>
+                                • 11日、25日下午：在賽巴斯丁房間（好感度<6心）<br>
+                                • 冬夜市場（冬季15-17日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>亞歷克斯</strong></td>
+                            <td>• 雨天：在家或家附近<br>
+                                • 夏季16日：診所<br>
+                                • 與海莉好感度>6心時不去海莉家<br>
+                                • 冬夜市場（冬季17日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>卡洛琳</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 社區中心修復後每週六：工藝室<br>
+                                • 秋季25日：診所<br>
+                                • 冬夜市場（冬季16日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>柯林特</strong></td>
+                            <td>• 社區中心修復後每週五：鍋爐房<br>
+                                • 冬夜市場（冬季15日）<br>
+                                • 冬季16日：診所</td>
+                        </tr>
+                        <tr>
+                            <td><strong>德米特里厄斯</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 夏季25日：診所<br>
+                                • 冬夜市場（冬季16日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>艾利歐特</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 夏季9日：診所<br>
+                                • 冬夜市場（冬季17日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>艾米莉</strong></td>
+                            <td>• 雨天：在家然後去酒館<br>
+                                • 社區中心修復後每週五：工藝室<br>
+                                • 冬季11日：診所<br>
+                                • 冬夜市場（冬季15日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>伊芙琳</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 每季2日、23日：診所<br>
+                                • 社區中心修復後每週六：工藝室<br>
+                                • 冬夜市場（冬季17日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>喬治</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 每季23日：診所<br>
+                                • 冬夜市場（冬季17日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>格斯</strong></td>
+                            <td>• 社區中心修復後：去採購<br>
+                                • 秋季4日：診所</td>
+                        </tr>
+                        <tr>
+                            <td><strong>海莉</strong></td>
+                            <td>• 雨天：不去噴泉（週二-週日）<br>
+                                • 冬季9日：不去</td>
+                        </tr>
+                        <tr>
+                            <td><strong>哈維</strong></td>
+                            <td>• 雨天：在家然後去酒館<br>
+                                • 冬夜市場（冬季15日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>賈斯</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 冬季18日：診所<br>
+                                • 夏天不上課</td>
+                        </tr>
+                        <tr>
+                            <td><strong>喬迪</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 春季18日：診所<br>
+                                • 春季11日與Vincent一起<br>
+                                • 社區中心修復後每週三、五去皮埃爾商店<br>
+                                • 社區中心修復後每週六：主廳</td>
+                        </tr>
+                        <tr>
+                            <td><strong>肯特</strong></td>
+                            <td>• 雨天：待在家或家附近</td>
+                        </tr>
+                        <tr>
+                            <td><strong>莉亞</strong></td>
+                            <td>• 雨天：在家然後去酒館<br>
+                                • 春季16日：診所</td>
+                        </tr>
+                        <tr>
+                            <td><strong>利奧</strong></td>
+                            <td>• 雨天：在他的小屋</td>
+                        </tr>
+                        <tr>
+                            <td><strong>劉易斯</strong></td>
+                            <td>• 雨天：在家然後去酒館<br>
+                                • 生日或社區中心修復後去地窖<br>
+                                • 社區中心修復後每週一、三、四、日：去社區中心</td>
+                        </tr>
+                        <tr>
+                            <td><strong>林納斯</strong></td>
+                            <td>• 雨天：在帳篷裡或附近<br>
+                                • 冬夜市場（冬季15日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>瑪妮</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 秋季18日：診所<br>
+                                • 冬季18日與Jas一起</td>
+                        </tr>
+                        <tr>
+                            <td><strong>瑪魯</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 冬夜市場（冬季16日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>潘姆</strong></td>
+                            <td>• 社區中心未修復：去Joja超市然後去酒館<br>
+                                • 春季25日：診所</td>
+                        </tr>
+                        <tr>
+                            <td><strong>潘妮</strong></td>
+                            <td>• 雨天：待在拖車或去博物館<br>
+                                • 雨天23日：在樹下閱讀<br>
+                                • 冬季4日：診所<br>
+                                • 社區中心修復後：在社區中心閱讀<br>
+                                • 夏天不上課</td>
+                        </tr>
+                        <tr>
+                            <td><strong>皮埃爾</strong></td>
+                            <td>• 非雨天週五：去酒館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>羅賓</strong></td>
+                            <td>• 雨天：在家<br>
+                                • 夏季18日：診所<br>
+                                • 冬夜市場（冬季16日）<br>
+                                • 社區中心修復後每週一：去社區中心</td>
+                        </tr>
+                        <tr>
+                            <td><strong>山姆</strong></td>
+                            <td>• 雨天：在家或酒館<br>
+                                • 秋季11日：診所<br>
+                                • 每季9日、23日：在城鎮閒逛（好感度<6心與Penny）<br>
+                                • 社區中心修復後每週一、三：去博物館</td>
+                        </tr>
+                        <tr>
+                            <td><strong>賽巴斯丁</strong></td>
+                            <td>• 雨天：去碼頭或酒館<br>
+                                • 夏季4日：診所<br>
+                                • 第一年週四：待在家<br>
+                                • 冬夜市場（冬季16日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>謝恩</strong></td>
+                            <td>• 社區中心修復後：不去Joja超市<br>
+                                • 冬夜市場（冬季16日）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>文森特</strong></td>
+                            <td>• 雨天：待在家<br>
+                                • 春季11日：診所<br>
+                                • 夏天不上課</td>
+                        </tr>
+                        <tr>
+                            <td><strong>威利</strong></td>
+                            <td>• 雨天：去酒館<br>
+                                • 春季9日：診所</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tip-box">
+                    <strong>💡 特殊情況小提示：</strong>
+                    <ul>
+                        <li><strong>冬夜市場：</strong>冬季15-17日晚上5點到凌晨2點</li>
+                        <li><strong>社區中心修復：</strong>完成所有收集包後</li>
+                        <li><strong>好感度影響：</strong>與某些NPC好感度達到6心後行程會改變</li>
+                        <li><strong>Joja路線：</strong>選擇Joja超市路線的玩家，部分行程不同</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>💡 找人技巧</h2>
+                
+                <div class="tip-box">
+                    <strong>🎯 常用時段：</strong>
+                    <ul>
+                        <li><strong>商店營業時間：</strong>大多9:00-17:00（各店略有不同）</li>
+                        <li><strong>診所：</strong>哈維 9:00-15:00</li>
+                        <li><strong>酒館：</strong>格斯 12:00-00:00</li>
+                        <li><strong>社交黃金時段：</strong>晚上7-9點很多人在酒館</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <strong>📍 常見地點：</strong>
+                    <ul>
+                        <li><strong>城鎮廣場</strong> - 白天常有人在噴泉旁</li>
+                        <li><strong>海灘</strong> - 艾利歐特、威利常駐</li>
+                        <li><strong>山區</strong> - 羅賓、德米特里厄斯、瑪魯、賽巴斯丁</li>
+                        <li><strong>森林</strong> - 莉亞、林納斯</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ 注意事項：</strong>
+                    <ul>
+                        <li>節日當天行程會完全不同</li>
+                        <li>下雨天部分NPC會改變行程</li>
+                        <li>好感度事件可能暫時改變行程</li>
+                        <li>肯特在第一年不會出現（在軍隊服役）</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <p><a href="index.html">🏠 返回首頁</a></p>
+            <p>📅 星露谷物語 - NPC完整行程表</p>
+        </div>
+    </div>
+    
+    <!-- 放大圖片燈箱 -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    
+    <script>
+        function scrollToDay(dayId) {
+            document.getElementById(dayId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function openLightbox(img) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = img.src;
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+        
+        // ESC鍵關閉燈箱
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

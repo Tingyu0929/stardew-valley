@@ -1,47 +1,147 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>星露谷物語 iOS 完整攻略</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      /* Optional: Custom scrollbar styling for better aesthetics */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px; /* For horizontal scrollbars */
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #4CAF50;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #45a049;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+    <title>星露谷物語完整攻略</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="font-sans antialiased bg-white text-gray-800">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 星露谷物語完整攻略</h1>
+            <p>新手到進階的全方位指南 - 離線可用版本</p>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2>📖 攻略章節</h2>
+                <p>點擊下方卡片進入各個章節的詳細攻略。所有內容完全離線可用！</p>
+                
+                <div class="guide-grid">
+                    <a href="getting-started.html" class="guide-card">
+                        <div class="card-icon">🎮</div>
+                        <h3>新手入門</h3>
+                        <p>遊戲基礎、農場選擇、第一週攻略</p>
+                    </a>
+                    
+                    <a href="farming.html" class="guide-card">
+                        <div class="card-icon">🌱</div>
+                        <h3>種植指南</h3>
+                        <p>四季作物、收益分析、灑水器</p>
+                    </a>
+                    
+                    <a href="foraging.html" class="guide-card">
+                        <div class="card-icon">🍄</div>
+                        <h3>採集指南</h3>
+                        <p>四季採集、礦物寶石、博物館獎勵</p>
+                    </a>
+                    
+                    <a href="fishing.html" class="guide-card">
+                        <div class="card-icon">🎣</div>
+                        <h3>釣魚指南</h3>
+                        <p>完整魚類圖鑑、傳說魚王、漁具</p>
+                    </a>
+                    
+                    <a href="mining-combat.html" class="guide-card">
+                        <div class="card-icon">⚔️</div>
+                        <h3>挖礦與戰鬥</h3>
+                        <p>武器裝備、礦井攻略、戰鬥技巧</p>
+                    </a>
+                    
+                    <a href="map.html" class="guide-card">
+                        <div class="card-icon">🗺️</div>
+                        <h3>地圖指南</h3>
+                        <p>所有地點、營業時間、快速移動</p>
+                    </a>
+                    
+                    <a href="buildings.html" class="guide-card">
+                        <div class="card-icon">🏗️</div>
+                        <h3>建築升級</h3>
+                        <p>農舍升級、所有建築、建造順序</p>
+                    </a>
+                    
+                    <a href="characters.html" class="guide-card">
+                        <div class="card-icon">👥</div>
+                        <h3>人物關係</h3>
+                        <p>34位NPC、生日日曆、送禮系統</p>
+                    </a>
+                    
+                    <a href="seasons.html" class="guide-card">
+                        <div class="card-icon">📅</div>
+                        <h3>四季活動</h3>
+                        <p>節日活動、季節特色、商店時間</p>
+                    </a>
+                    
+                    <a href="bundles.html" class="guide-card">
+                        <div class="card-icon">🎁</div>
+                        <h3>社區中心</h3>
+                        <p>6個房間、37個收集包完整清單</p>
+                    </a>
+                    
+                    <a href="books.html" class="guide-card">
+                        <div class="card-icon">📚</div>
+                        <h3>書籍系統</h3>
+                        <p>1.6版本新內容、能力書、技能書</p>
+                    </a>
+                    
+                    <a href="tips.html" class="guide-card">
+                        <div class="card-icon">💡</div>
+                        <h3>進階技巧</h3>
+                        <p>賺錢技巧、效率提升、實用秘技</p>
+                    </a>
+                    
+                    <a href="schedules.html" class="guide-card">
+                        <div class="card-icon">📅</div>
+                        <h3>NPC行程表</h3>
+                        <p>所有村民的每日行程、找人神器</p>
+                    </a>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>📱 使用說明</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>離線使用：</strong>所有內容已下載，無需網路連線</li>
+                        <li><strong>固定表格標題：</strong>滾動長表格時標題保持可見</li>
+                        <li><strong>響應式設計：</strong>支援手機、平板、電腦</li>
+                        <li><strong>快速導航：</strong>每個頁面都有章節導航和返回按鈕</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>🎯 推薦閱讀順序</h2>
+                <div class="tip-box">
+                    <strong>新手推薦：</strong>
+                    <ol>
+                        <li><strong>新手入門</strong> - 了解遊戲基礎和農場選擇</li>
+                        <li><strong>種植指南</strong> - 學習如何賺錢</li>
+                        <li><strong>釣魚指南</strong> - 掌握釣魚技巧（初期重要收入）</li>
+                        <li><strong>人物關係</strong> - 記住生日送禮</li>
+                        <li><strong>社區中心</strong> - 了解收集包目標</li>
+                    </ol>
+                </div>
+                
+                <div class="info-box">
+                    <strong>進階玩家：</strong>
+                    <ul>
+                        <li><strong>進階技巧</strong> - 學習高效賺錢方法</li>
+                        <li><strong>挖礦與戰鬥</strong> - 裝備強化系統</li>
+                        <li><strong>採集指南</strong> - 完成博物館收集</li>
+                        <li><strong>書籍系統</strong> - 1.6版本新內容</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <p>🌾 星露谷物語完整攻略 v2.2</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                包含13個完整章節 | 80+ 表格 | 60,000+ 字 | 完全離線可用
+            </p>
+        </div>
+    </div>
 </body>
 </html>
